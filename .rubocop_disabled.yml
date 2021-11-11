@@ -1,0 +1,36 @@
+# Ruby cops
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/ClassLength:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/NumericLiterals:
+  Enabled: false
+
+Lint/MissingSuper:
+  Enabled: false
+
+Lint/UselessMethodDefinition:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Layout/HashAlignment:
+  Enabled: false
+
+Style/AccessorGrouping:
+  Enabled: false
+
+Style/RedundantRegexpEscape:
+  Enabled: false
+
+Metrics/ParameterLists:
+  Enabled: false
+
+Naming/RescuedExceptionsVariableName:
+  Enabled: false

@@ -1,0 +1,27 @@
+inherit_from:
+  - .rubocop_enabled.yml
+  - .rubocop_disabled.yml
+
+# This is rubocop configuration file base on official RoR Rubocop configuration
+# https://github.com/rails/rails/blob/master/.rubocop.yml
+
+require:
+  - rubocop-rails
+  - rubocop-thread_safety
+
+AllCops:
+  TargetRubyVersion: 2.6.6
+  NewCops: enable
+  Include:
+    - '**/*.rb'
+    - '**/*.rake'
+    - Gemfile
+  Exclude:
+    - 'vendor/**/*'
+    - 'config/unicorn.rb'
+    - 'bin/*'
+    - 'db/**/*'
+    - 'spec/*'
+    - 'config/**/*'
+    - 'node_modules/**/*'
+    - 'lib/tasks/*'
