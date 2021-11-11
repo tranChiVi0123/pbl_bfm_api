@@ -18,6 +18,9 @@
 !/tmp/pids/
 !/tmp/pids/.keep
 
+.env
+.DS_Store
+
 # Ignore uploaded files in development.
 /storage/*
 !/storage/.keep
