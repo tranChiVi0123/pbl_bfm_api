@@ -6,6 +6,8 @@ class User < ApplicationRecord
   #  :recoverable, :rememberable, :validatable
   devise :database_authenticatable, :registerable
 
+  has_many :accounts, dependent: :destroy
+
   validates :email, uniqueness: { case_sensitive: false }, presence: true, allow_blank: false, format: Devise.email_regexp
   validates :password, presence: true
   validates :password, confirmation: true

@@ -10,7 +10,7 @@ class Api::Users::SessionsController < Devise::SessionsController
       token = user.generate_jwt
       render json: { token: token }, status: :ok
     else
-      render json: 'Invalid email or password', status: :unprocessable_entity
+      render json: { errors: 'Invalid email or password' }
     end
   end
 

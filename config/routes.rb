@@ -6,6 +6,10 @@ Rails.application.routes.draw do
       :registrations => "api/users/registrations",
       :sessions      => "api/users/sessions"
      }
+    
+    namespace :accounts do
+      resources :aggregations, only: [:create]
+    end
   end
 
   get "home", to: "home#show"

@@ -18,7 +18,6 @@ class ApplicationController < ActionController::API
 
     @current_user_id = jwt_payload['id']
   rescue JWT::ExpiredSignature, JWT::VerificationError, JWT::DecodeError
-    head :unauthorized
     render json: { errors: [:unauthorized] }, status: :unauthorized
   end
 
@@ -27,7 +26,7 @@ class ApplicationController < ActionController::API
   end
 
   def current_user
-    @current_user ||= super || User.find(@current_user_id)
+    @current_user ||= @current_user || User.find(@current_user_id)
   end
 
   def signed_in?
