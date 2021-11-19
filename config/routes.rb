@@ -10,6 +10,9 @@ Rails.application.routes.draw do
     namespace :accounts do
       resources :aggregations, only: [:create]
     end
+
+    resources :accounts, only: [:index]
+    resources :transactions, only: [:index]
   end
 
   get "home", to: "home#show"

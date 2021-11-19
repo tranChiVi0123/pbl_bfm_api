@@ -20,6 +20,18 @@ class AggregationService < ApplicationService
     ApiCaller.call('aggre_accounts', {}, 'GET')
   end
 
+  def transactions
+    ApiCaller.call('transactions', {}, 'GET')
+  end
+
+  def get_aggre_accounts_by_id(aggre_account_ids)
+    aggre_accounts.select { |aggre_account| aggre_account_ids.include?(aggre_account['account']['account_id_hash']) }
+  end
+
+  def get_transactions_by_id(aggre_account_ids)
+    transactions.select { |aggre_account| aggre_account_ids.include?(aggre_account['transaction']['hashed_account_id']) }
+  end
+
   def generate_access_token(user_id, aggre_account_id)
     token_expired_at = 7.days.from_now
     access_token  = JWT.encode({ user_id: user_id, aggre_account_id: aggre_account_id, exp: token_expired_at.to_i },
