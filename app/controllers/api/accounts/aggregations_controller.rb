@@ -1,27 +1,31 @@
 # frozen_string_literal: true
 
 class Api::Accounts::AggregationsController < ApplicationController
-  before_action :check_valid_aggre_account_id
+  before_action :otp_valid?
+
   def create
-    tokens = aggre_service.generate_access_token(current_user.id, params[:aggre_account_id])
-    account = Account.new(user_id: current_user.id, aggre_account_id: params[:aggre_account_id],
-                          access_token: tokens[:access_token], refresh_token: tokens[:refresh_token])
+    res = aggre_service.generate_access_token(current_user.id, oauth_params)
+    account = Account.new(user_id: current_user.id, aggre_account_id: res[:aggre_account_id],
+                          access_token: res[:access_token], refresh_token: res[:refresh_token])
+
     if account.save
-      render json: tokens
+      render json: account, status: :ok
     else
-      render json: { errors: [account.errors] }
+      render json: { errors: account.errors }, status: :bad_request
     end
   end
 
   private
 
-  def check_valid_aggre_account_id
-    unless aggre_service.aggre_account_id_exists?(params[:aggre_account_id])
-      render json: { errors: [invalid: "Account's ID not exists!"] }
-    end
+  def otp_valid?
+    render json: { errors: 'OTP not exists!' }, status: :bad_request unless aggre_service.otp_exists?(oauth_params[:otp])
   end
 
   def aggre_service
     @aggre_service ||= @aggre_service || AggregationService.instance
+  end
+
+  def oauth_params
+    params.require(:oauth).permit(:otp)
   end
 end
