@@ -25,6 +25,10 @@ class AggregationService < ApplicationService
     ApiCaller.call('transactions', {}, 'GET')
   end
 
+  def all_otp
+    oauth.keys.to_json
+  end
+
   def get_aggre_accounts_by_id(aggre_account_ids)
     aggre_accounts.select { |aggre_account| aggre_account_ids.include?(aggre_account['account']['account_id_hash']) }
   end

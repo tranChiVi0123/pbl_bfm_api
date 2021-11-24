@@ -15,6 +15,6 @@ Rails.application.routes.draw do
     resources :transactions, only: [:index]
   end
 
-  get "home", to: "home#show"
+  get "list_otp", to: "home#show"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
